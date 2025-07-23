@@ -1,5 +1,7 @@
 <template>
-  <section>
+  <main>
     <HomeHero />
-  </section>
+    <HomeLatestPosts />
+    <HomeEmailSubscription />
+  </main>
 </template>
