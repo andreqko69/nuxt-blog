@@ -10,7 +10,7 @@ const categories = [
   <footer>
     <section class="container mx-auto space-y-5 px-4 py-6">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="space-y-4">
+        <div class="space-y-4 flex flex-col items-center md:items-start">
           <AppLogo size="md" />
           <p class="text-muted-foreground">
             Your go-to source for web development insights, tutorials, and industry trends.

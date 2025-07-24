@@ -1,5 +1,28 @@
 <script setup lang="ts">
-const value = ref('')
+import type { FormSubmitEvent } from '@nuxt/ui'
+import * as z from 'zod/mini'
+
+const schema = z.object({
+  email: z.email('Invalid email'),
+})
+
+type Schema = z.output<typeof schema>
+
+const state = reactive<Partial<Schema>>({
+  email: undefined,
+})
+
+const toast = useToast()
+
+async function onSubmit({ data: { email } }: FormSubmitEvent<Schema>) {
+  toast.add({
+    title: 'Success',
+    description: 'Thank you for subscribing!',
+    color: 'success',
+  })
+
+  state.email = email
+}
 </script>
 
 <template>
@@ -11,12 +34,15 @@ const value = ref('')
       <p class="text-muted-foreground mb-8">
         Subscribe to our newsletter and never miss our latest articles and updates.
       </p>
-      <div class="flex items-center justify-center gap-2">
-        <UInput v-model="value" size="xl" placeholder="Enter your email" />
-        <UButton size="xl">
+      <UForm :schema="schema" :state="state" class="flex items-start justify-center gap-4" @submit="onSubmit">
+        <UFormField name="email">
+          <UInput v-model="state.email" size="xl" placeholder="Enter your email" />
+        </UFormField>
+
+        <UButton type="submit" size="xl">
           Subscribe
         </UButton>
-      </div>
+      </UForm>
     </div>
   </section>
 </template>

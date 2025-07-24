@@ -1,7 +1,7 @@
 <template>
-  <main class="flex flex-col gap-16">
+  <div class="flex flex-col gap-16">
     <HomeHero />
     <HomeLatestPosts />
     <HomeEmailSubscription />
-  </main>
+  </div>
 </template>
