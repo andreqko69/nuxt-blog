@@ -39,7 +39,7 @@ function toggleIsOpen() {
           <UButton :icon="`${isOpen ? 'mdi:close' : 'mdi:menu'}`" class="cursor-pointer" size="xl" @click="toggleIsOpen" />
         </div>
       </div>
-      <div v-if="isOpen" class="md:hidden absolute left-0 bg-[var(--ui-bg)] w-full shadow-md">
+      <div v-if="isOpen" class="md:hidden px-4 absolute left-0 bg-[var(--ui-bg)] w-full shadow-md">
         <div class="container mx-auto py-4 space-y-4 ">
           <USeparator />
           <ul class="flex flex-col gap-4">
