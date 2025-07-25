@@ -1,5 +1,5 @@
 <template>
-  <UCard :ui="{ body: 'p-0, sm:p-0' }">
+  <UCard :ui="{ body: 'p-0 sm:p-0' }">
     <NuxtImg class="w-full" src="https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg" />
     <div class="flex flex-col gap-6 p-4">
       <h3 className="text-2xl font-semibold leading-none tracking-tight line-clamp-2 hover:text-primary transition-colors">
