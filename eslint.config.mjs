@@ -8,4 +8,9 @@ export default withNuxt(
     typescript: true,
     stylistic: true,
   }),
+  {
+    rules: {
+      'no-console': 'warn',
+    },
+  },
 )

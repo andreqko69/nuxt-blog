@@ -13,7 +13,7 @@
             Explore Posts
           </UButton>
         </NuxtLink>
-        <NuxtLink :to="routes.signup.to" class="ursor-pointer">
+        <NuxtLink :to="routes.signUp.to" class="ursor-pointer">
           <UButton variant="outline" size="xl">
             Get Started
           </UButton>

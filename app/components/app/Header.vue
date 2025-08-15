@@ -26,9 +26,9 @@ function toggleIsOpen() {
               {{ routes.login.label }}
             </UButton>
           </NuxtLink>
-          <NuxtLink :to="routes.signup.to">
+          <NuxtLink :to="routes.signUp.to">
             <UButton class="cursor-pointer" size="xl">
-              {{ routes.signup.label }}
+              {{ routes.signUp.label }}
             </UButton>
           </NuxtLink>
           <AppThemeToggleIcon />
@@ -51,9 +51,9 @@ function toggleIsOpen() {
           </ul>
           <USeparator />
           <div class="flex items-center gap-2">
-            <NuxtLink :to="routes.signup.to">
+            <NuxtLink :to="routes.signUp.to">
               <UButton class="cursor-pointer" size="xl">
-                {{ routes.signup.label }}
+                {{ routes.signUp.label }}
               </UButton>
             </NuxtLink>
             <NuxtLink :to="routes.login.to">

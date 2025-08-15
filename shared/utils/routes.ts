@@ -3,7 +3,7 @@ export const routes = {
   posts: { to: '/posts', label: 'Posts' },
   about: { to: '/about', label: 'About' },
   login: { to: '/auth/login', label: 'Login' },
-  signup: { to: '/auth/signup', label: 'Sign Up' },
+  signUp: { to: '/auth/signup', label: 'Sign Up' },
 } as const
 
 export const mainNavigation = [
