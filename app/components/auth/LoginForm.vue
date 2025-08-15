@@ -14,8 +14,23 @@ const state = reactive<Partial<Schema>>({
   password: '',
 })
 
+const formRef = useTemplateRef('form')
+
+const pending = ref(false)
+
 async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
-  console.log('data', data)
+  pending.value = true
+
+  try {
+    await new Promise(resolve => setTimeout(resolve, 5000))
+    console.log('data', data)
+    console.log('formRef', formRef)
+  }
+  catch (error) {
+    console.error(error)
+  }
+
+  pending.value = false
 }
 </script>
 
@@ -25,7 +40,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
       <span class="text-xl font-bold">Login</span>
     </template>
 
-    <UForm :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
+    <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
       <UFormField label="Email" name="email">
         <UInput v-model="state.email" class="w-full" />
       </UFormField>
@@ -34,7 +49,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
       </UFormField>
 
       <UButton
-        type="submit" class="w-full justify-center font-semibold"
+        type="submit" class="w-full justify-center font-semibold" :loading="pending"
       >
         Login
       </UButton>
@@ -42,9 +57,10 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
 
     <template #footer>
       <div>
-        Don't have an account? <NuxtLink :to="routes.signUp.to" class="text-green-500 font-semibold">
+        Don't have an account?
+        <ULink :to="routes.signUp.to">
           Register
-        </NuxtLink>
+        </ULink>
       </div>
     </template>
   </UCard>

@@ -23,8 +23,20 @@ const state = reactive<Partial<Schema>>({
   confirmPassword: '',
 })
 
+const pending = ref(false)
+
 async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
-  console.log('data', data)
+  pending.value = true
+
+  try {
+    await new Promise(resolve => setTimeout(resolve, 5000))
+    console.log('data', data)
+  }
+  catch (error) {
+    console.error(error)
+  }
+
+  pending.value = false
 }
 </script>
 
@@ -49,7 +61,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
       </UFormField>
 
       <UButton
-        type="submit" class="w-full justify-center font-semibold"
+        type="submit" class="w-full justify-center font-semibold" :loading="pending"
       >
         Sign up
       </UButton>
@@ -57,9 +69,10 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
 
     <template #footer>
       <div>
-        Already have an account? <NuxtLink :to="routes.login.to" class="text-green-500 font-semibold">
+        Already have an account?
+        <ULink :to="routes.login.to">
           Login
-        </NuxtLink>
+        </ULink>
       </div>
     </template>
   </UCard>
