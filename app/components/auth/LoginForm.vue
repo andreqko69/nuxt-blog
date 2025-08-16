@@ -2,9 +2,11 @@
 import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod/mini'
 
+import authClient from '~~/app/lib/auth-client'
+
 const schema = z.object({
   email: z.email({ message: 'Invalid email address' }),
-  password: z.string().check(z.minLength(6, { message: 'Password should be at least 6 characters long' }), z.trim()),
+  password: z.string().check(z.minLength(8, { message: 'Password should be at least 8 characters long' }), z.trim()),
 })
 
 type Schema = z.output<typeof schema>
@@ -14,23 +16,18 @@ const state = reactive<Partial<Schema>>({
   password: '',
 })
 
-const formRef = useTemplateRef('form')
-
 const pending = ref(false)
 
 async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
   pending.value = true
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 5000))
-    console.log('data', data)
-    console.log('formRef', formRef)
+    await authClient.signIn.email({ email: data.email, password: data.password })
+    await navigateTo(APP_ROUTES.home.to)
   }
   catch (error) {
-    console.error(error)
+    console.error('error', error)
   }
-
-  pending.value = false
 }
 </script>
 
@@ -40,7 +37,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
       <span class="text-xl font-bold">Login</span>
     </template>
 
-    <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
+    <UForm :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
       <UFormField label="Email" name="email">
         <UInput v-model="state.email" class="w-full" />
       </UFormField>
@@ -58,7 +55,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
     <template #footer>
       <div>
         Don't have an account?
-        <ULink :to="routes.signUp.to">
+        <ULink :to="APP_ROUTES.signUp.to">
           Register
         </ULink>
       </div>

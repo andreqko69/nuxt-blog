@@ -2,11 +2,13 @@
 import type { FormSubmitEvent } from '@nuxt/ui'
 import * as z from 'zod/mini'
 
+import authClient from '~~/app/lib/auth-client'
+
 const schema = z.object({
   username: z.string({ message: 'Username is required' }).check(z.minLength(2, { message: 'Username should be at least 2 characters long' }), z.trim()),
   email: z.email({ message: 'Invalid email address' }),
-  password: z.string().check(z.minLength(6, { message: 'Password should be at least 6 characters long' }), z.trim()),
-  confirmPassword: z.string().check(z.minLength(6, { message: 'Confirm password should be at least 6 characters long' }), z.trim()),
+  password: z.string().check(z.minLength(8, { message: 'Password should be at least 8 characters long' }), z.trim()),
+  confirmPassword: z.string().check(z.minLength(8, { message: 'Confirm password should be at least 8 characters long' }), z.trim()),
 }).check(
   z.refine(data => data.password === data.confirmPassword, {
     path: ['confirmPassword'],
@@ -29,11 +31,16 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
   pending.value = true
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 5000))
-    console.log('data', data)
+    await authClient.signUp.email({
+      email: data.email,
+      password: data.password,
+      name: data.username,
+      callbackURL: APP_ROUTES.home.to,
+    })
+    await navigateTo(APP_ROUTES.home.to)
   }
   catch (error) {
-    console.error(error)
+    console.error('error', error)
   }
 
   pending.value = false
@@ -70,7 +77,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
     <template #footer>
       <div>
         Already have an account?
-        <ULink :to="routes.login.to">
+        <ULink :to="APP_ROUTES.login.to">
           Login
         </ULink>
       </div>

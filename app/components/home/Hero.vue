@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import authClient from '~~/app/lib/auth-client'
+
+const { data: session } = await authClient.useSession(useFetch)
+const isLoggedIn = computed(() => Boolean(session.value))
+</script>
+
 <template>
   <section class="hero py-20 px-4 text-center bg-gradient-to-br from-background to-muted">
     <div class="hero-content container mx-auto flex flex-col gap-6 text-center">
@@ -8,12 +15,12 @@
         Discover the latest insights, tutorials, and trends in web development, programming, and technology.
       </p>
       <div class="flex justify-center items-center gap-3">
-        <NuxtLink :to="routes.posts.to" class="cursor-pointer">
+        <NuxtLink :to="APP_ROUTES.posts.to" class="cursor-pointer">
           <UButton size="xl" trailing-icon="mdi:arrow-right">
             Explore Posts
           </UButton>
         </NuxtLink>
-        <NuxtLink :to="routes.signUp.to" class="ursor-pointer">
+        <NuxtLink v-if="!isLoggedIn" :to="APP_ROUTES.signUp.to" class="cursor-pointer">
           <UButton variant="outline" size="xl">
             Get Started
           </UButton>

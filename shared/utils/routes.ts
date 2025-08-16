@@ -1,4 +1,4 @@
-export const routes = {
+export const APP_ROUTES = {
   home: { to: '/', label: 'Home' },
   posts: { to: '/posts', label: 'Posts' },
   about: { to: '/about', label: 'About' },
@@ -6,8 +6,8 @@ export const routes = {
   signUp: { to: '/auth/signup', label: 'Sign Up' },
 } as const
 
-export const mainNavigation = [
-  routes.home,
-  routes.posts,
-  routes.about,
+export const MAIN_NAVIGATION = [
+  APP_ROUTES.home,
+  APP_ROUTES.posts,
+  APP_ROUTES.about,
 ] as const

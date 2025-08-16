@@ -22,7 +22,7 @@ const categories = [
             Quick Links
           </h3>
           <ul class="space-y-2">
-            <li v-for="route in mainNavigation" :key="route.to">
+            <li v-for="route in MAIN_NAVIGATION" :key="route.to">
               <NuxtLink :to="route.to">
                 {{ route.label }}
               </NuxtLink>

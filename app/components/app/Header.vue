@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import authClient from '~~/app/lib/auth-client'
+
+const { data: session } = await authClient.useSession(useFetch)
+const isLoggedIn = computed(() => Boolean(session.value))
+
 const isOpen = ref(false)
 
 function toggleIsOpen() {
@@ -9,32 +14,33 @@ function toggleIsOpen() {
 <template>
   <header class="p-4 sticky top-0 z-50 bg-[var(--ui-bg)] shadow-md">
     <nav class="container mx-auto">
-      <div class="flex items-center justify-between">
+      <div class="grid grid-cols-2 md:grid-cols-3 items-center justify-between">
         <AppLogo size="lg" />
         <div class="hidden md:block">
-          <ul class="flex items-center gap-4">
-            <li v-for="route in mainNavigation" :key="route.to">
+          <ul class="flex justify-center items-center gap-4">
+            <li v-for="route in MAIN_NAVIGATION" :key="route.to">
               <NuxtLink :to="route.to" class="text-lg">
                 {{ route.label }}
               </NuxtLink>
             </li>
           </ul>
         </div>
-        <div class="hidden md:flex items-center gap-2">
-          <NuxtLink :to="routes.login.to">
-            <UButton variant="ghost" class="cursor-pointer" size="xl">
-              {{ routes.login.label }}
+        <div class="hidden md:flex items-center justify-end gap-2">
+          <NuxtLink :to="APP_ROUTES.login.to">
+            <UButton v-if="!isLoggedIn" variant="ghost" class="cursor-pointer" size="xl">
+              {{ APP_ROUTES.login.label }}
             </UButton>
           </NuxtLink>
-          <NuxtLink :to="routes.signUp.to">
+          <NuxtLink v-if="!isLoggedIn" :to="APP_ROUTES.signUp.to">
             <UButton class="cursor-pointer" size="xl">
-              {{ routes.signUp.label }}
+              {{ APP_ROUTES.signUp.label }}
             </UButton>
           </NuxtLink>
+          <UserMenu />
           <AppThemeToggleIcon />
         </div>
 
-        <div class=" flex items-center gap-2 md:hidden">
+        <div class=" flex justify-end items-center gap-2 md:hidden">
           <AppThemeToggleIcon />
           <UButton :icon="`${isOpen ? 'mdi:close' : 'mdi:menu'}`" class="cursor-pointer" size="xl" @click="toggleIsOpen" />
         </div>
@@ -43,22 +49,22 @@ function toggleIsOpen() {
         <div class="container mx-auto py-4 space-y-4 ">
           <USeparator />
           <ul class="flex flex-col gap-4">
-            <li v-for="route in mainNavigation" :key="route.to">
+            <li v-for="route in MAIN_NAVIGATION" :key="route.to">
               <NuxtLink :to="route.to" class="text-lg">
                 {{ route.label }}
               </NuxtLink>
             </li>
           </ul>
-          <USeparator />
-          <div class="flex items-center gap-2">
-            <NuxtLink :to="routes.signUp.to">
+          <USeparator v-if="!isLoggedIn" />
+          <div v-if="!isLoggedIn" class="flex items-center gap-2">
+            <NuxtLink :to="APP_ROUTES.signUp.to">
               <UButton class="cursor-pointer" size="xl">
-                {{ routes.signUp.label }}
+                {{ APP_ROUTES.signUp.label }}
               </UButton>
             </NuxtLink>
-            <NuxtLink :to="routes.login.to">
+            <NuxtLink :to="APP_ROUTES.login.to">
               <UButton variant="ghost" class="cursor-pointer" size="xl">
-                {{ routes.login.label }}
+                {{ APP_ROUTES.login.label }}
               </UButton>
             </NuxtLink>
           </div>
