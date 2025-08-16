@@ -4,9 +4,8 @@
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "scripts": {
-    "build": "prisma generate && nuxt build",
+    "build": "prisma migrate deploy && prisma generate && nuxt build",
     "dev": "nuxt dev",
-    "deploy": "prisma migrate deploy && prisma generate && nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "prisma generate && nuxt prepare",
