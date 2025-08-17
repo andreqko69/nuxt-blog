@@ -5,7 +5,7 @@
   "packageManager": "pnpm@10.14.0",
   "scripts": {
     "build": "nuxt build",
-    "postinstall": "pnpm prisma:generate && nuxt prepare",
+    "postinstall": "nuxt prepare",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
