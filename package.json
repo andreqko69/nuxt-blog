@@ -4,8 +4,8 @@
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "scripts": {
-    "build": "prisma migrate deploy && prisma generate && nuxt build",
-    "postinstall": "prisma generate && nuxt prepare",
+    "build": "nuxt build",
+    "postinstall": "pnpm prisma:generate && nuxt prepare",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -13,7 +13,8 @@
     "lint-staged": "lint-staged",
     "prepare": "husky",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:pull": "prisma db pull",
     "prisma:push": "prisma db push",
     "prisma:seed": "prisma db seed"
