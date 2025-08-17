@@ -23,14 +23,11 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '.prisma/client/index-browser':
-          import.meta.env.NODE_ENV === 'production'
-            ? fileURLToPath(
-                new URL('./node_modules/.pnpm/@prisma+client@6.14.0_prisma@6.14.0_magicast@0.3.5_typescript@5.9.2__typescript@5.9.2/node_modules/@prisma/client/index-browser.js', import.meta.url),
-              )
-            : './node_modules/.prisma/client/index-browser.js',
-      },
-    },
+        '.prisma/client/index-browser': fileURLToPath(
+          new URL('./node_modules/@prisma/client/index-browser.js', import.meta.url)
+        )
+      }
+    }
   },
   eslint: {
     config: {
