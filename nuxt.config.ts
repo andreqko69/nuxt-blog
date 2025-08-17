@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: {
+      // fix for vite/prisma build issue
       alias: {
         '.prisma/client/index-browser': fileURLToPath(
           new URL('./node_modules/@prisma/client/index-browser.js', import.meta.url),
