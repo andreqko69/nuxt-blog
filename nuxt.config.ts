@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -24,7 +25,9 @@ export default defineNuxtConfig({
       alias: {
         '.prisma/client/index-browser':
           import.meta.env.NODE_ENV === 'production'
-            ? '../.prisma/client/index-browser.js'
+            ? fileURLToPath(
+                new URL('./node_modules/.prisma/client/index-browser.js', import.meta.url),
+              )
             : './node_modules/.prisma/client/index-browser.js',
       },
     },
