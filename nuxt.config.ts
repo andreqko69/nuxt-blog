@@ -22,7 +22,10 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
+        '.prisma/client/index-browser':
+          import.meta.env.NODE_ENV === 'production'
+            ? './node_modules/.prisma/client/index-browser.js'
+            : '../.prisma/client/index-browser.js',
       },
     },
   },

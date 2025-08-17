@@ -5,10 +5,10 @@
   "packageManager": "pnpm@10.14.0",
   "scripts": {
     "build": "prisma migrate deploy && prisma generate && nuxt build",
+    "postinstall": "prisma generate && nuxt prepare",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "prisma generate && nuxt prepare",
     "lint": "eslint .",
     "lint-staged": "lint-staged",
     "prepare": "husky",
