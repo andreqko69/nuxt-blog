@@ -2,10 +2,25 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import authClient from '~~/app/lib/auth-client'
 
-const { data: session } = await authClient.useSession(useFetch)
-const isLoggedIn = computed(() => Boolean(session.value))
+const [{ value: session }, { value: isAdmin }] = await Promise.all([
+  useCurrentUserSession(),
+  useIsAdmin(),
+])
+
+const isLoggedIn = computed(() => Boolean(session))
 
 const items = ref<DropdownMenuItem[]>([
+  ...(isAdmin
+    ? [
+        {
+          label: 'Admin Dashboard',
+          icon: 'mdi:view-dashboard',
+          onSelect: async () => {
+            await navigateTo(APP_ROUTES.adminDashboard.to)
+          },
+        },
+      ]
+    : []),
   {
     label: 'Log out',
     icon: 'mdi:exit-to-app',
