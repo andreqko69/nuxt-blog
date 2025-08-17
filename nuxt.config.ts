@@ -24,10 +24,10 @@ export default defineNuxtConfig({
     resolve: {
       alias: {
         '.prisma/client/index-browser': fileURLToPath(
-          new URL('./node_modules/@prisma/client/index-browser.js', import.meta.url)
-        )
-      }
-    }
+          new URL('./node_modules/@prisma/client/index-browser.js', import.meta.url),
+        ),
+      },
+    },
   },
   eslint: {
     config: {
