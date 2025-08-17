@@ -42,8 +42,6 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
   catch (error) {
     console.error('error', error)
   }
-
-  pending.value = false
 }
 </script>
 
