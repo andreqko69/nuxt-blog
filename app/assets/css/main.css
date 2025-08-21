@@ -9,3 +9,14 @@
 .page-leave-to {
   @apply opacity-0 scale-95;
 }
+
+/* rich text editor overrides */
+
+#rich-text-editor .ql-toolbar.ql-snow,
+#rich-text-editor .ql-container.ql-snow {
+    border: 0;
+}
+
+#rich-text-editor .ql-editor.ql-blank::before {
+    @apply text-muted;
+}

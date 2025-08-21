@@ -4,6 +4,9 @@
       <div class="space-y-6">
         <PostTitleEditor />
         <PostExcerptEditor />
+        <client-only>
+          <PostContentEditor />
+        </client-only>
       </div>
     </div>
   </div>
