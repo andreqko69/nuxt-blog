@@ -12,9 +12,13 @@
 
 /* rich text editor overrides */
 
-#rich-text-editor .ql-toolbar.ql-snow,
-#rich-text-editor .ql-container.ql-snow {
+#rich-text-editor .ql-toolbar.ql-snow {
     border: 0;
+}
+
+
+#rich-text-editor .ql-container.ql-snow {
+    @apply rounded-md border-0 ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary
 }
 
 #rich-text-editor .ql-editor.ql-blank::before {
