@@ -27,7 +27,7 @@ const items = [
   <ul class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
     <li v-for="item in items" :key="item.label">
       <NuxtLink :to="item.to">
-        <UCard :ui="{ body: 'flex flex-col items-center justify-center gap-2 cursor-pointer' }">
+        <UCard :ui="{ body: 'flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-muted' }">
           <UIcon :name="item.iconName" class="size-6" />
           <span class="font-semibold">{{ item.label }}</span>
         </UCard>
