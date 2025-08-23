@@ -13,7 +13,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { charset: 'utf-8' },
-        { name: 'description', content: 'My first Nuxt app' },
+        { name: 'description', content: 'Developer\'s blog by Kogaro' },
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
