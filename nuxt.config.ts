@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   app: {
     head: {
-      title: 'Kogaro\'s Blog',
+      title: 'Dev Blog',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { charset: 'utf-8' },
