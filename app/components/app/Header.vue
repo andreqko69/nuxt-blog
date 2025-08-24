@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import authClient from '~~/app/lib/auth-client'
-
-const { data: session } = await authClient.useSession(useFetch)
-const isLoggedIn = computed(() => Boolean(session.value))
+const [{ value: session }, { value: isAdmin }] = await Promise.all([
+  useCurrentUserSession(),
+  useIsAdmin(),
+])
+const isLoggedIn = computed(() => Boolean(session))
 
 const isOpen = ref(false)
 
@@ -52,6 +53,11 @@ function toggleIsOpen() {
             <li v-for="route in MAIN_NAVIGATION" :key="route.to">
               <NuxtLink :to="route.to" class="text-lg">
                 {{ route.label }}
+              </NuxtLink>
+            </li>
+            <li v-if="isAdmin">
+              <NuxtLink :to="APP_ROUTES.adminDashboard.to" class="text-lg">
+                {{ APP_ROUTES.adminDashboard.label }}
               </NuxtLink>
             </li>
           </ul>

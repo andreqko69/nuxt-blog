@@ -5,4 +5,4 @@ export const ROLES = {
   USER: 'user',
 }
 
-export const isAdmin = (role?: User['role'] | undefined | null) => role === ROLES.ADMIN
+export const isAdminRole = (role?: User['role'] | undefined | null) => role === ROLES.ADMIN
