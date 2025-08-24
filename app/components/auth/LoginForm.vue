@@ -39,7 +39,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
 
     <UForm :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
       <UFormField label="Email" name="email">
-        <UInput v-model="state.email" class="w-full" />
+        <UInput v-model="state.email" class="w-full" type="email" />
       </UFormField>
       <UFormField label="Password" name="password">
         <UInput v-model="state.password" type="password" class="w-full" />
