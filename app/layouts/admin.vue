@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const { value: isAdmin } = await useIsAdmin()
 
-console.log('isAdmin', isAdmin)
+if (!isAdmin) {
+  await navigateTo(APP_ROUTES.home.to)
+}
 </script>
 
 <template>
