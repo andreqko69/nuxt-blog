@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 declare global {
   var __prisma: PrismaClient | undefined
 }
-
+// prisma singleton
 const prisma = (() => {
   if (process.env.NODE_ENV === 'production') {
     return new PrismaClient()
