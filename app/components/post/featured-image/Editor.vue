@@ -2,9 +2,13 @@
 </script>
 
 <template>
-  <PostEditorCard title="Post Title">
+  <PostEditorCard title="Featured Image">
     <template #content>
-      <UInput class="w-full" size="xl" placeholder="Enter your post title" />
+      <UFileUpload
+        label="Drop your image here"
+        description="SVG, PNG, JPG or GIF (max. 2MB)"
+        class="w-full min-h-48"
+      />
     </template>
   </PostEditorCard>
 </template>
