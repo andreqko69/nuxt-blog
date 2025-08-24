@@ -24,6 +24,11 @@ function toggleIsOpen() {
                 {{ route.label }}
               </NuxtLink>
             </li>
+            <li v-if="isAdmin">
+              <NuxtLink :to="APP_ROUTES.adminDashboard.to" class="text-lg">
+                Admin
+              </NuxtLink>
+            </li>
           </ul>
         </div>
         <div class="hidden md:flex items-center justify-end gap-2">
@@ -57,7 +62,7 @@ function toggleIsOpen() {
             </li>
             <li v-if="isAdmin">
               <NuxtLink :to="APP_ROUTES.adminDashboard.to" class="text-lg">
-                {{ APP_ROUTES.adminDashboard.label }}
+                Admin
               </NuxtLink>
             </li>
           </ul>
