@@ -17,6 +17,7 @@ definePageMeta({
 
       <div class="space-y-4">
         <PostPublishSettingsEditor />
+        <PostCategoryEditor />
       </div>
     </div>
   </div>
