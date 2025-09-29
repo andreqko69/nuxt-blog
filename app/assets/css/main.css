@@ -12,19 +12,32 @@
 
 /* rich text editor overrides */
 
-#rich-text-editor .ql-toolbar.ql-snow {
-    border: 0;
-}
+#rich-text-editor {
+    .ql-snow.ql-toolbar button:hover, .ql-snow .ql-toolbar button:hover, .ql-snow.ql-toolbar button:focus, .ql-snow .ql-toolbar button:focus, .ql-snow.ql-toolbar .ql-picker-label:hover, .ql-snow .ql-toolbar .ql-picker-label:hover, .ql-snow.ql-toolbar .ql-picker-item:hover, .ql-snow .ql-toolbar .ql-picker-item:hover {
+        background: inherit;
+    }
 
+    .ql-container {
+        font-size: 16px;
 
-#rich-text-editor .ql-container.ql-snow {
-    @apply rounded-md border-0 ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary
-}
+        &.ql-snow {
+            @apply rounded-md border-0 ring ring-inset ring-accented focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary
+        }
+    }
 
-#rich-text-editor .ql-editor.ql-blank::before {
-    @apply text-muted;
-}
+    .ql-toolbar.ql-snow {
+        border: 0;
+    }
 
-#rich-text-editor .ql-editor {
-    min-height: 200px;
+    .ql-editor {
+        min-height: 200px;
+
+        &.ql-blank::before {
+            @apply text-dimmed;
+        }
+    }
+
+    .ql-snow .ql-editor h6 {
+        font-size: 1em;
+    }
 }
