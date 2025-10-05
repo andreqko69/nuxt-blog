@@ -2,7 +2,7 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique
   emailVerified Boolean   @default(false)
-  name          String?
+  username      String    @unique
   image         String?
   role          String    @default("user")
   banned        Boolean   @default(false)

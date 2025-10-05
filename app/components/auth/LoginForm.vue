@@ -4,7 +4,6 @@ import * as z from 'zod/mini'
 
 import authClient from '~~/app/lib/auth-client'
 
-const form = useTemplateRef('form')
 const schema = z.object({
   email: z.email({ message: 'Invalid email address' }),
   password: z.string().check(z.minLength(8, { message: 'Password should be at least 8 characters long' }), z.trim()),
@@ -18,26 +17,29 @@ const state = reactive<Partial<Schema>>({
 })
 
 const pending = ref(false)
+const form = useTemplateRef('form')
 
 async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
   pending.value = true
 
   try {
-    const { error } = await authClient.signIn.email({ email: data.email, password: data.password })
-
-    if (error) {
-      console.error(error)
-      form.value?.setErrors([{ name: 'email', message: error.message ?? 'Invalid email or password' }])
-      pending.value = false
-
-      return
-    }
-
-    await navigateTo(APP_ROUTES.home.to)
+    await authClient.signIn.email({ email: data.email, password: data.password }, {
+      onSuccess: async () => {
+        await navigateTo(APP_ROUTES.home.to)
+      },
+      onError: ({ error }) => {
+        console.error(error)
+        form.value?.setErrors([{ name: 'email', message: error.message ?? 'Invalid email or password' }])
+        pending.value = false
+      },
+      onRequest: () => {
+        pending.value = true
+      },
+    })
   }
   catch (error) {
     console.error(error)
-    form.value?.setErrors([{ name: 'email', message: 'Something went wrong. Try again later' }])
+    form.value?.setErrors([{ name: 'email', message: 'Something went wrong. Please, try again' }])
     pending.value = false
   }
 }

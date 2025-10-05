@@ -26,21 +26,40 @@ const state = reactive<Partial<Schema>>({
 })
 
 const pending = ref(false)
+const form = useTemplateRef('form')
 
 async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
-  pending.value = true
-
   try {
     await authClient.signUp.email({
       email: data.email,
       password: data.password,
       name: data.username,
       callbackURL: APP_ROUTES.home.to,
+    }, {
+      onRequest: () => {
+        pending.value = true
+      },
+      onError: ({ error }) => {
+        console.error(error)
+
+        let name = 'email'
+
+        if (error.message?.toLowerCase().includes('username')) {
+          name = 'username'
+        }
+
+        form.value?.setErrors([{ name, message: error.message }])
+        pending.value = false
+      },
+      onSuccess: async () => {
+        await navigateTo(APP_ROUTES.home.to)
+      },
     })
-    await navigateTo(APP_ROUTES.home.to)
   }
   catch (error) {
-    console.error('error', error)
+    console.error(error)
+    form.value?.setErrors([{ name: 'email', message: 'Something went wrong. Please, try again' }])
+    pending.value = false
   }
 }
 </script>
@@ -51,7 +70,7 @@ async function handleSubmit({ data }: FormSubmitEvent<Schema>) {
       <span class="text-xl font-bold">Sign Up</span>
     </template>
 
-    <UForm :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
+    <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="handleSubmit">
       <UFormField label="Username" name="username">
         <UInput v-model="state.username" class="w-full" />
       </UFormField>
