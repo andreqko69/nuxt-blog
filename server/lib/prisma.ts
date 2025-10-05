@@ -13,6 +13,7 @@ const prisma = (() => {
     if (!globalThis.__prisma) {
       globalThis.__prisma = new PrismaClient()
     }
+
     return globalThis.__prisma
   }
 })()
