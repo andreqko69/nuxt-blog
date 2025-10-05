@@ -1,9 +1,14 @@
 import { betterAuth } from 'better-auth'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
 import { APIError } from 'better-auth/api'
-import { admin } from 'better-auth/plugins'
+import { admin, createAuthMiddleware } from 'better-auth/plugins'
 
 import prisma from './prisma'
+
+export const AUTH_ERROR_MESSAGES = {
+  EMAIL_ALREADY_EXISTS: 'Email already exists',
+  USERNAME_ALREADY_EXISTS: 'Username already exists',
+}
 
 const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -18,27 +23,28 @@ const auth = betterAuth({
       name: 'username',
     },
   },
-  databaseHooks: {
-    user: {
-      // TODO: Handle unique constraint violation error from the database (race condition)
-      create: {
-        before: async (user) => {
-          const usernameExists = await prisma.user.findUnique({
-            where: {
-              username: user.name,
-            },
-          })
+  hooks: {
+    before: createAuthMiddleware(async ({ body, path }) => {
+      // Customize error messages and add pre-sign-up checks
+      if (path.startsWith('/sign-up')) {
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            OR: [
+              { email: body.email },
+              { username: body.name },
+            ],
+          },
+        })
 
-          if (usernameExists) {
-            throw new APIError('CONFLICT', { message: 'Username already exists' })
-          }
+        if (existingUser) {
+          const message = existingUser.email === body.email
+            ? AUTH_ERROR_MESSAGES.EMAIL_ALREADY_EXISTS
+            : AUTH_ERROR_MESSAGES.USERNAME_ALREADY_EXISTS
 
-          return {
-            data: user,
-          }
-        },
-      },
-    },
+          throw new APIError('CONFLICT', { message })
+        }
+      }
+    }),
   },
 })
 
