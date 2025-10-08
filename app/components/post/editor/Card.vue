@@ -1,9 +1,9 @@
 <script setup lang="ts">
-defineProps<{ title: string }>()
+defineProps<{ title: string, rootClassName?: string, bodyClassName?: string }>()
 </script>
 
 <template>
-  <UCard :ui="{ body: 'space-y-6', root: 'overflow-visible' }">
+  <UCard :ui="{ body: `flex flex-col gap-6${bodyClassName ? ` ${bodyClassName}` : ''}`, root: `overflow-visible${rootClassName ? ` ${rootClassName}` : ''}` }">
     <h3 class="text-3xl font-semibold">
       {{ title }}
     </h3>

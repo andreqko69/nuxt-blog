@@ -25,7 +25,7 @@ definePageMeta({
       </AdminPageTitle>
 
       <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
-        <div class="space-y-6">
+        <div class="flex flex-col gap-6">
           <PostTitleEditor />
           <PostExcerptEditor />
           <client-only>
