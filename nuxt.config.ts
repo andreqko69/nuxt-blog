@@ -9,11 +9,11 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   app: {
     head: {
-      title: 'Dev Blog',
+      title: 'Sloppy Blog',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { charset: 'utf-8' },
-        { name: 'description', content: 'Developer\'s blog by Kogaro' },
+        { name: 'description', content: 'Sloppy Blog by Kogaro' },
       ],
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },

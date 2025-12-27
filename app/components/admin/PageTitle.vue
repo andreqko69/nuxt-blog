@@ -11,7 +11,7 @@ defineProps<{
       <h1 class="text-4xl font-bold">
         {{ title }}
       </h1>
-      <p class="hero-description mx-auto text-2xl">
+      <p class="hero-description mx-auto text-xl">
         {{ description }}
       </p>
     </div>

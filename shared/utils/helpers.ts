@@ -1,7 +1,7 @@
-export function debounce(func: (...params: Array<unknown>) => unknown, time: number) {
+export function debounce(func: (...params: Array<any>) => unknown, time: number) {
   let timeout: NodeJS.Timeout | undefined
 
-  const funcWithTimeout = (...params: Array<unknown>) => {
+  const funcWithTimeout = (...params: Array<any>) => {
     if (timeout) {
       clearTimeout(timeout)
     }

@@ -7,7 +7,7 @@ const isLoggedIn = computed(() => Boolean(session.value))
 
 <template>
   <HeroSection
-    title="Welcome to Kogaro's Blog"
+    title="Welcome to Sloppy Blog"
     description="Discover the latest insights, tutorials, and trends in web development, programming, and technology."
   >
     <template #buttons>

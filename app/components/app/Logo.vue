@@ -17,7 +17,7 @@ const currentSize = computed(() => sizes[props.size])
   <NuxtLink to="/" class="flex items-center gap-2 cursor-pointer">
     <UIcon name="mdi:book-open-blank-variant-outline" :class="currentSize.iconClass" />
     <p :class="`${currentSize.textClass} font-bold flex flex-col md:flex-row md:flex-line md:items-center md:gap-2`">
-      <span class="leading-none">Kogaro's</span><span class="leading-none">Blog</span>
+      <span class="leading-none">Sloppy</span><span class="leading-none">Blog</span>
     </p>
   </NuxtLink>
 </template>

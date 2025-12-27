@@ -8,7 +8,7 @@ definePageMeta({
 <template>
   <div class="p-4 w-full">
     <div class="container w-full mx-auto space-y-6">
-      <AdminPageTitle title="Admin Dashboard" description="Manage your blog content and settings">
+      <AdminPageTitle title="Admin Dashboard" description="Create and publish your blog post">
         <template #actions>
           <div class="flex items-center gap-2">
             <UButton icon="mdi:eye-outline" variant="outline" class="cursor-pointer" size="xl" leading :ui="{ leadingIcon: 'size-5' }">
