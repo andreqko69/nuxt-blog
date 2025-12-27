@@ -20,12 +20,12 @@ function toggleIsOpen() {
         <div class="hidden md:block">
           <ul class="flex justify-center items-center gap-4">
             <li v-for="route in MAIN_NAVIGATION" :key="route.to">
-              <NuxtLink :to="route.to" class="text-lg">
+              <NuxtLink :to="route.to" active-class="font-bold" class="text-lg">
                 {{ route.label }}
               </NuxtLink>
             </li>
             <li v-if="isAdmin">
-              <NuxtLink :to="APP_ROUTES.adminDashboard.to" class="text-lg">
+              <NuxtLink :to="APP_ROUTES.adminDashboard.to" active-class="font-bold" class="text-lg">
                 Admin
               </NuxtLink>
             </li>
