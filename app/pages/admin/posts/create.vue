@@ -3,6 +3,19 @@ definePageMeta({
   layout: 'admin',
   middleware: 'admin',
 })
+
+const post = ref({
+  title: '',
+  excerpt: '',
+  content: null,
+  published: false,
+  categories: [],
+  featuredImage: null,
+})
+
+watch(() => post, (newValue) => {
+  console.log('Value changed:', newValue.value)
+}, { deep: true })
 </script>
 
 <template>
@@ -26,8 +39,8 @@ definePageMeta({
 
       <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6">
         <div class="flex flex-col gap-6">
-          <PostTitleEditor />
-          <PostExcerptEditor />
+          <PostTitleEditor v-model="post.title" />
+          <PostExcerptEditor v-model="post.excerpt" />
           <client-only>
             <PostContentEditor />
           </client-only>
