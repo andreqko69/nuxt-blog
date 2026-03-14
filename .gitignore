@@ -26,3 +26,6 @@ logs
 # IDE
 .history/
 .idea/
+
+# Prisma generated client
+generated/

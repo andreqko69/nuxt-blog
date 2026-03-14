@@ -1,7 +1,9 @@
 {
-  "formatter": {
-    "code_actions": {
-      "source.fixAll.eslint": true
-    }
-  }
+  "languages": {
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+  },
 }
