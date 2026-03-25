@@ -51,7 +51,7 @@
     "prisma": "^7.5.0"
   },
   "lint-staged": {
-    "app/**/*.{vue}": "eslint",
-    "shared/**/*.{ts}": "eslint"
+    "app/**/*.{vue}": "eslint --fix",
+    "shared/**/*.{ts}": "eslint --fix"
   }
 }
