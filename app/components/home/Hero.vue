@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import authClient from '~~/app/lib/auth-client'
-
-const { data: session } = await authClient.useSession(useFetch)
-const isLoggedIn = computed(() => Boolean(session.value))
+const sessionRef = await useCurrentUserSession()
+const isLoggedIn = computed(() => Boolean(sessionRef.value))
 </script>
 
 <template>

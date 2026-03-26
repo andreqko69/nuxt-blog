@@ -2,15 +2,15 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import authClient from '~~/app/lib/auth-client'
 
-const [{ value: session }, { value: isAdmin }] = await Promise.all([
+const [sessionRef, isAdminRef] = await Promise.all([
   useCurrentUserSession(),
   useIsAdmin(),
 ])
 
-const isLoggedIn = computed(() => Boolean(session))
+const isLoggedIn = computed(() => Boolean(sessionRef.value))
 
-const items = ref<DropdownMenuItem[]>([
-  ...(isAdmin
+const items = computed<DropdownMenuItem[]>(() => [
+  ...(isAdminRef.value
     ? [
         {
           label: 'Admin Dashboard',

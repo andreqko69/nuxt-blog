@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  devServer: { port: 3001 },
   modules: ["@nuxt/ui", "@nuxt/eslint", "@nuxt/image"],
   css: ["~/assets/css/main.css"],
   app: {
@@ -22,7 +23,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: ["zod/mini", "better-auth/client/plugins", "better-auth/vue"],
+      include: ["zod/mini", "better-auth/client/plugins", "better-auth/vue", "tailwind-merge"],
     },
   },
   eslint: {

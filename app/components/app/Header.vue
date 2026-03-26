@@ -1,9 +1,6 @@
 <script setup lang="ts">
-const [{ value: session }, { value: isAdmin }] = await Promise.all([
-  useCurrentUserSession(),
-  useIsAdmin(),
-])
-const isLoggedIn = computed(() => Boolean(session))
+const [sessionRef, isAdminRef] = await Promise.all([useCurrentUserSession(), useIsAdmin()])
+const isLoggedIn = computed(() => Boolean(sessionRef.value))
 
 const isOpen = ref(false)
 
@@ -13,7 +10,7 @@ function toggleIsOpen() {
 </script>
 
 <template>
-  <header class="p-4 sticky top-0 z-50 bg-[var(--ui-bg)] shadow-md">
+  <header class="p-4 sticky top-0 z-50 bg-default shadow-md">
     <nav class="container mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-3 items-center justify-between">
         <AppLogo size="lg" />
@@ -24,7 +21,7 @@ function toggleIsOpen() {
                 {{ route.label }}
               </NuxtLink>
             </li>
-            <li v-if="isAdmin">
+            <li v-if="isAdminRef">
               <NuxtLink :to="APP_ROUTES.adminDashboard.to" active-class="font-bold" class="text-lg">
                 Admin
               </NuxtLink>
@@ -32,8 +29,8 @@ function toggleIsOpen() {
           </ul>
         </div>
         <div class="hidden md:flex items-center justify-end gap-2">
-          <NuxtLink :to="APP_ROUTES.login.to">
-            <UButton v-if="!isLoggedIn" variant="ghost" class="cursor-pointer" size="xl">
+          <NuxtLink v-if="!isLoggedIn" :to="APP_ROUTES.login.to">
+            <UButton variant="ghost" class="cursor-pointer" size="xl">
               {{ APP_ROUTES.login.label }}
             </UButton>
           </NuxtLink>
@@ -46,13 +43,13 @@ function toggleIsOpen() {
           <AppThemeToggleIcon />
         </div>
 
-        <div class=" flex justify-end items-center gap-2 md:hidden">
+        <div class="flex justify-end items-center gap-2 md:hidden">
           <AppThemeToggleIcon />
           <UButton :icon="`${isOpen ? 'mdi:close' : 'mdi:menu'}`" class="cursor-pointer" size="xl" @click="toggleIsOpen" />
         </div>
       </div>
       <div v-if="isOpen" class="md:hidden px-4 absolute left-0 bg-[var(--ui-bg)] w-full shadow-md">
-        <div class="container mx-auto py-4 space-y-4 ">
+        <div class="container mx-auto py-4 space-y-4">
           <USeparator />
           <ul class="flex flex-col gap-4">
             <li v-for="route in MAIN_NAVIGATION" :key="route.to">
@@ -60,7 +57,7 @@ function toggleIsOpen() {
                 {{ route.label }}
               </NuxtLink>
             </li>
-            <li v-if="isAdmin">
+            <li v-if="isAdminRef">
               <NuxtLink :to="APP_ROUTES.adminDashboard.to" class="text-lg">
                 Admin
               </NuxtLink>
